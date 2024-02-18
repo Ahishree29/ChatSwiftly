@@ -1,0 +1,17 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  background-color: black;
+}
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #363434;
+}
