@@ -14,9 +14,6 @@ const app = express();
 connectDB();
 const port = process.env.PORT || 5000;
 app.use(express.json());
-app.get("/", (req, res) => {
-  res.send("API is Running");
-});
 
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
