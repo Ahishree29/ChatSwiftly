@@ -29,7 +29,9 @@ function SingleChat() {
   const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
-    socket = io(ENDPOINT);
+    const socket = io(ENDPOINT, {
+      transports: ["websocket"],
+    });
     socket.emit("setup", user);
     socket.on("connected", () => setSocketConnected(true));
     socket.on("typing", () => setIsTyping(true));
