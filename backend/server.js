@@ -2,6 +2,7 @@ const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
 const express = require("express");
 const colors = require("colors");
+const cors = require("cors");
 
 const userRoutes = require("./routes/userRouters");
 const chatRoutes = require("./routes/chatRouters");
@@ -43,7 +44,9 @@ const server = app.listen(
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://chatapp-s1qq.onrender.com",
+    methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 io.on("connection", (socket) => {
