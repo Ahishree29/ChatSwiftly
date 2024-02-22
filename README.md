@@ -14,10 +14,12 @@ Chat History: Chat conversations display timestamps to provide users with contex
 
 # Technologies Used
 Frontend:
+
 React.js: A JavaScript library for building user interfaces.
 Tailwind CSS: A utility-first CSS framework for rapid UI development.
 Socket.IO Client: Enables real-time, bidirectional, and event-based communication.
 Backend:
+
 Node.js with Express: A server-side JavaScript runtime and web application framework for building APIs.
 Socket.IO: Enables real-time, bidirectional, and event-based communication.
 JSON Web Tokens (JWT): Securely transmits information between parties as JSON objects.
@@ -26,7 +28,7 @@ MongoDB: A NoSQL database for storing user data and chat history.
 # Getting Started
 To run ChatSwiftly locally, follow these steps:
 
-Clone the repository: git clone https://github.com/yourusername/chatswiftly.git
+Clone the repository: git clone https://github.com/Ahishree29/ChatSwiftly
 Navigate to the project directory: cd chatswiftly
 Install dependencies for both frontend and backend: npm install
 Configure environment variables, including MongoDB URI, Port number, and JWT secret.
