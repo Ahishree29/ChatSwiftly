@@ -18,6 +18,7 @@ Frontend:
 React.js: A JavaScript library for building user interfaces.
 Tailwind CSS: A utility-first CSS framework for rapid UI development.
 Socket.IO Client: Enables real-time, bidirectional, and event-based communication.
+
 Backend:
 
 Node.js with Express: A server-side JavaScript runtime and web application framework for building APIs.
