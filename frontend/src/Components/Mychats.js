@@ -21,6 +21,7 @@ function Mychats() {
     notification,
     notificationUpdate,
     setNotificationUpdate,
+    updateNotification,
   } = ChatState();
   const fetchChat = async () => {
     try {
@@ -41,13 +42,21 @@ function Mychats() {
     fetchChat();
   }, [fetchAgain]);
 
-  const handleChat = (chat) => {
-    setSelectedChat(chat);
+  useEffect(() => {
     const chatIds = notification && notification?.map((item) => item.chat._id);
 
-    if (chatIds.includes(chat._id)) {
-      setNotificationUpdate(true);
+    if (selectedChat && chatIds.includes(selectedChat._id)) {
+      updateNotification();
     }
+  }, [selectedChat, notification]);
+
+  const handleChat = (chat) => {
+    // const chatIds = notification && notification?.map((item) => item.chat._id);
+
+    // if (chatIds.includes(chat._id)) {
+    //   updateNotification();
+    // }
+    setSelectedChat(chat);
   };
   const formateCreatedAt = (createdAt) => {
     const today = new Date().toLocaleDateString("en-IN", {
@@ -76,18 +85,18 @@ function Mychats() {
 
   return (
     <div
-      className={`text-green-600  bg-zinc-800 mr-1 ml-2 mb-2 opacity-95 text-2xl  px-4 pt-4 font-normal z-1000 rounded-lg md:w-1/3 w-screen ${
-        selectedChat && "hidden md:block"
+      className={`text-green-600  bg-zinc-800 mr-1  ml-2 mb-2 opacity-95 text-2xl  px-4 pt-4 font-normal z-1000 rounded-lg md:w-1/3 w-screen ${
+        selectedChat && "hidden  md:block"
       }`}
     >
       <div className="flex flex-col h-full">
         <div className="flex flex-row text-2xl font-bold justify-between ">
           My Chats
           <button
-            className="bg bg-zinc-600 p-2 rounded-lg ml-20 "
+            className="bg bg-zinc-600 p-2 rounded-lg  "
             onClick={() => setModalOpen(!modalOpen)}
           >
-            <span className="flex flex-row justify-center items-center text-xl font-bold">
+            <span className="flex flex-row justify-center items-center text-xl font-bold ">
               New Group Chats <HiOutlinePlus className="mx-2" />
             </span>
           </button>

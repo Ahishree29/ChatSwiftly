@@ -18,7 +18,6 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import UserListItem from "../UserAvatar/UserListItem";
 
-
 function SideDrawer() {
   const [search, setSearch] = useState();
   const [searchResult, setSearchResult] = useState();
@@ -131,25 +130,25 @@ function SideDrawer() {
     getNotification();
   }, [notificationSent, notify]);
 
-  useEffect(() => {
-    const updateNotification = async () => {
-      try {
-        const config = {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        };
-        const { data } = await axios.put(
-          `/api/notification/${selectedChat._id}`,
-          {},
-          config
-        );
-        setNotification(data);
-        setNotificationSent(true);
-      } catch (error) {}
-    };
-    updateNotification();
-  }, [notificationUpdate]);
+  // useEffect(() => {
+  //   const updateNotification = async () => {
+  //     try {
+  //       const config = {
+  //         headers: {
+  //           Authorization: `Bearer ${user.token}`,
+  //         },
+  //       };
+  //       const { data } = await axios.put(
+  //         `/api/notification/${selectedChat._id}`,
+  //         {},
+  //         config
+  //       );
+  //       setNotification(data);
+  //       setNotificationSent(true);
+  //     } catch (error) {}
+  //   };
+  //   updateNotification();
+  // }, [notificationUpdate]);
 
   const handleNotification = () => {
     setSelectedChat(notification[0].chat);
@@ -173,7 +172,7 @@ function SideDrawer() {
           <HiOutlineSearch className="text-green-500 text-2xl font-bold mr-2" />
 
           <button
-            className="text-zinc-500 text-lg font-medium active:bg-zinc-600"
+            className="text-zinc-500 text-sm font-medium active:bg-zinc-600"
             onClick={handleDrawerOpen}
           >
             Search user
@@ -209,7 +208,7 @@ function SideDrawer() {
               <span className="text-green-700">no notifications</span>
             )}{" "}
           </Tooltip>
-          <div className="flex flex-row justify-center items-center bg-zinc-700 p-2 rounded-md opacity-70 ">
+          <div className="flex flex-row justify-center items-center bg-zinc-700 p-2 px-5 rounded-md opacity-70 ">
             {user.pic ? (
               <img
                 src={user.pic}

@@ -12,7 +12,7 @@ function ChatBox() {
 
   return (
     <div
-      className={`text-green-600  bg-zinc-800 mr-1 ml-2 mb-2 opacity-95 text-2xl  px-4 pt-1 font-normal z-1000 rounded-lg md:w-1/3 w-screen flex-1 ${
+      className={`text-green-600  bg-zinc-800 mr-2 ml-1 mb-2 opacity-95 text-2xl  px-4 pt-1 font-normal z-1000 rounded-lg md:w-1/3 w-screen flex-1 ${
         !selectedChat && "hidden md:block"
       }`}
     >

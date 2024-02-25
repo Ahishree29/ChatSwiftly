@@ -27,15 +27,14 @@ function SingleChat() {
   const [socketConnected, setSocketConnected] = useState();
   const [typing, setTyping] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-
+  const [roomId, setRoomId] = useState();
   useEffect(() => {
-    socket = io(ENDPOINT, {
-      transports: ["websocket"],
-    });
+    socket = io(ENDPOINT);
     socket.emit("setup", user);
     socket.on("connected", () => setSocketConnected(true));
     socket.on("typing", () => setIsTyping(true));
     socket.on("stop typing", () => setIsTyping(false));
+
     return () => {
       socket.disconnect();
     };
@@ -69,6 +68,7 @@ function SingleChat() {
     selectedChatCompare = selectedChat;
   }, [selectedChat]);
 
+  console.log("roomId", roomId);
   useEffect(() => {
     socket.on("message recived", (newMessageRecived) => {
       if (
@@ -119,6 +119,7 @@ function SingleChat() {
       setTyping(true);
       socket.emit("typing", selectedChat._id);
     }
+    socket.on("typing", (room) => setRoomId(room));
     let lastTypingTime = new Date().getTime();
     var timerLength = 3000;
     setTimeout(() => {
@@ -186,7 +187,7 @@ function SingleChat() {
             ) : (
               <div onKeyDown={sendMessage}>
                 <ScrollableChat message={message} />
-                {isTyping && selectedChat ? (
+                {isTyping ? (
                   <SyncLoader
                     color={"#22b642"}
                     loading={isTyping}

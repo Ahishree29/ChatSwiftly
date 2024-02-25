@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const { createContext, useContext, useState, useEffect } = require("react");
@@ -22,6 +23,23 @@ const ChatProvider = ({ children }) => {
     }
   }, [navigate]);
 
+  const updateNotification = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      const { data } = await axios.put(
+        `/api/notification/${selectedChat._id}`,
+        {},
+        config
+      );
+      setNotification(data);
+      setNotificationSent(true);
+    } catch (error) {}
+  };
+
   return (
     <ChatContext.Provider
       value={{
@@ -43,6 +61,7 @@ const ChatProvider = ({ children }) => {
         setNotify,
         notificationUpdate,
         setNotificationUpdate,
+        updateNotification,
       }}
     >
       {children}

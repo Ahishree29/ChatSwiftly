@@ -13,8 +13,7 @@ function Signin() {
   const [showConfiremedPassword, setShowConfiremedPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmite = async (e) => {
-    e.preventDefault();
+  const handleSubmite = async () => {
     setLoading(true);
     if (!name || !email || !password || !confirmPassword) {
       toast.error("you have missed the field");
@@ -157,6 +156,7 @@ function Signin() {
         <button
           className=" text-green-600 font-bold rounded-xl  bg-black mt-10 py-2 px-20 "
           onClick={handleSubmite}
+          disabled={loading}
         >
           {loading ? (
             <PulseLoader

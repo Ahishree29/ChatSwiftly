@@ -3,7 +3,8 @@ require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
 const express = require("express");
 const colors = require("colors");
 const cors = require("cors");
-
+const http = require("http");
+const { Server } = require("socket.io");
 const userRoutes = require("./routes/userRouters");
 const chatRoutes = require("./routes/chatRouters");
 const messageRouters = require("./routes/messageRouters");
@@ -12,6 +13,7 @@ const connectDB = require("./config/db");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 const app = express();
+const httpServer = http.createServer(app);
 connectDB();
 const port = process.env.PORT || 5000;
 app.use(express.json());
@@ -37,17 +39,18 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(notFound);
 app.use(errorHandler);
-const server = app.listen(
+httpServer.listen(
   port,
   console.log(`server Started on Port ${port}`.yellow.bold)
 );
-const io = require("socket.io")(server, {
-  pingTimeout: 60000,
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
-});
+// const io = require("socket.io")(server, {
+//   pingTimeout: 60000,
+//   cors: {
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST"],
+//   },
+// });
+const io = new Server(httpServer);
 io.on("connection", (socket) => {
   console.log("connection to socket.io");
   socket.on("setup", (userData) => {
@@ -59,6 +62,7 @@ io.on("connection", (socket) => {
     socket.join(room);
     console.log("user Joined room", room);
   });
+
   socket.on("typing", (room) => socket.in(room).emit("typing"));
   socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
   socket.on("new message", (newMessageRecived) => {

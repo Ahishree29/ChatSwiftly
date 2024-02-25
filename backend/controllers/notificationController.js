@@ -50,6 +50,7 @@ const getnotification = asyncHandler(async (req, res) => {
 
 const updatenotification = asyncHandler(async (req, res) => {
   try {
+    console.log("hey there i am triggered");
     const selectedNotification = await Notification.findOne({
       chat: req.params.ChatId,
       reciver: req.user._id,
